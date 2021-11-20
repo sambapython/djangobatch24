@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<title>EMP PORTAL</title>
+		<!-- External styles -->
+		<link rel="stylesheet" type="text/css" href="base.css">
+		<!-- internal styles -->
+		<style type="text/css">
+			
+			h1{text-align: center; color: green;}
+			#h1_blue{text-align: right; color: blue;}
+		</style>
+		<script type="text/javascript" src="base.js"></script>
+	</head>
+	<body style="color: red">
+		<button onclick="changecolor('red')">RED</button>
+		<button onclick="changecolor('blue')">BLUE</button>
+		<button onclick="changecolor('yellow')">YELLO</button>
+		<img src="images/logo.png" width=70, height="70" >
+		<a href="https://www.google.com">GOOGLE</a>
+		<a href="https://www.yahoo.com">YAHOO</a>
+		<a href="https://www.youtube.com">youtube</a>
+		<h4> PERSON REGISTRATION FORM</h4>
+		<form>
+			<div class="grp1">
+				Name: <input type="text" name=""><br>
+				Age: <input type="text" name=""><br>
+			</div>
+			<div class="grp2">
+				gender: Male <input type="radio" name="" onclick="erase_others('male')" id="male"> 
+					Female <input type="radio" name="" onclick="erase_others('female')" id="female"> 
+					Other <input type="radio" name="" onclick="erase_others('other')" id="other"><br>
+				blood group:
+				<select>
+					<option>A+ve</option>
+					<option>A-ve</option>
+					<option>B-ve</option>
+					<option>B+ve</option>
+					<option>O</option>
+					<option>O+ve</option>
+				</select><br>
+			</div>
+			<div class="grp3">
+				<!-- <button>SUBMIT</button> -->
+				Address: <textarea></textarea>
+				<input type="submit" value="SUMIT">
+			</div>
+
+		</form>
+
+		<!-- in line style -->
+		<h1 style="color: red;text-align: center;"> EMP PORTA with h1</h1>
+		<h1> EMP PORTAL </h1>
+		<h1 id="h1_blue"> LOGIN </h1>
+		<h1 id="h1_blue"> CONTACT US </h1>
+
+<p id="para_base">Employee has to login to portal every day. If he not loged in, will consider that as an absent.
+After log in he has to click on start time, that timer is just to track the employee hours, Currently it will not affect the salary calculation.</p>
+
+<p class="para_red">AT 12PM in working days. HR will login to Attendance portal and consider employee as a leave, if he could not see the login.</p>
+<p>In this is the case HR login to portal for two purposes</p>
+<ol type="10">
+	<li>To make it present and start time</li>
+	<li>To update employee leaves</li>
+</ol>
+
+
+<b>The Employee data prepared by Site Admin</b>
+
+
+<i>Automation.
+Every day on 12 AM will run a scheduler which makes the is present columns</i>
+
+		<!-- <h2> EMP PORTAL</h2>
+		<h3> EMP PORTAL</h3>
+		<h4> EMP PORTAL</h4>
+		<h5> EMP PORTAL</h5>
+		<h6> EMP PORTAL</h6> -->
+
+		<table border="2">
+			<tr><th>ID</th><th>NAME</th><th>SALARY</th></tr>
+			<tr><td>1</td><td>Anil</td><td>234y</td></tr>
+
+		</table>
+		
+	</body>
+
+
+</html>
