@@ -1,0 +1,11 @@
+install django
+pip install django
+
+python: it will show the python console
+import django
+django.get_version()
+
+come out from ptyhon prompt
+djagno-admin startproject empportal
+
+open empportal folder in any editor.
