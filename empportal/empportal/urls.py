@@ -15,7 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse
+import os
+
+def get_users(x):
+    #return "HELLO"
+    return HttpResponse("HELLO")
+
+def get_cpu_cores(request):
+    number_cores = os.cpu_count()
+    return HttpResponse(number_cores)
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("users/", get_users),# get_users(request_object)
+    path("numberOfCores/", get_cpu_cores),
 ]

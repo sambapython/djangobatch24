@@ -1,7 +1,11 @@
-install django
-pip install django
+Check in your machine whether python installed or not.
+python   command in your command prompt.
+if it says python is not an internal or extranal command then you need to install python.
 
-python: it will show the python console
+install django
+pip install django==3.2.9
+
+type "python" command in command prompt. it will show the python console
 import django
 django.get_version()
 
