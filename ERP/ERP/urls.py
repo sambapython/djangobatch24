@@ -1,4 +1,4 @@
-"""empportal URL Configuration
+"""ERP URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from emp.methods import get_users, get_cpu_cores
-from emp.views import home
+from accounting import views as accounting_views
+from sales import views as sales_views 
+from stock import views as stock_views 
+from pur import views as purchase_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("users/", get_users),# get_users(request_object)
-    path("numberOfCores/", get_cpu_cores),
-    path('', home)
+    path("accounting/index/", accounting_views.index),
+    path("sales/index/", sales_views.index),
+    path("pur/index/", purchase_views.index),
+    path("stock/index/", stock_views.index),
+
 ]
