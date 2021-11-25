@@ -1,5 +1,18 @@
 <html>
     <body>
-    <h1>HOME from templates</h1>
+    <h1>{{ data.header}}</h1>
+    <p>{{ data.title }}</p>
+    <!-- <p>{{ employees }}</p>
+    <p>{{ salaries }}</p> -->
+    <!-- <ol>
+        <li>HAMEER</li>
+        <li>ANIL</li>
+        <li>VAMSHI</li>
+    </ol> -->
+    <ol>
+        {% for emp in employees %}
+            <li>{{ emp.name|upper }}</li>
+        {% endfor %}
+    </ol>
     </body>
     </html>

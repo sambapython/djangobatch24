@@ -17,6 +17,9 @@ def home(request):
     #2,3 will be done by render function 
     # home.html
     #return HttpResponse(resp)
-    return render(request, "home.html")
+    employees = [{"name":"Hameer"},{"name":"Anil"},{"name":"Vamshi"}]
+    data = {"title":"Empportal", "header":"PORTAL"}
+    context = {"data": data, "employees": employees}
+    return render(request, "home.html", context)
     # render has to serach for home.html
 
