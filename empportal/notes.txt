@@ -1,0 +1,8 @@
+python manage.py shell
+it will open a django shell prompt, play with django model operations.
+
+from emp.models import Emp 
+vedha = Emp(empid=2, name="vedhanvesh", address="Hyderabad", salary_perday=3000, emp_type="ADMIN", email="vedha@gmail.com", phone="9676622024")
+vedha.save()
+to fetch the data from Emp table
+Emp.objects.all()
