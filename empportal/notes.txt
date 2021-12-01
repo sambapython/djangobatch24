@@ -6,3 +6,18 @@ vedha = Emp(empid=2, name="vedhanvesh", address="Hyderabad", salary_perday=3000,
 vedha.save()
 to fetch the data from Emp table
 Emp.objects.all()
+
+type the url : localhost:8000/admin/ It will shows the login screen.
+
+to login we need to create a user:
+close the server running and type the below command.
+python manage.py createsuperuser.
+The above comand ask details, enter the details and press enter.
+After create user. run the server again. type the url : localhost:8000/admin/ in browser.
+
+login with details of created user.
+
+To add your model (Emp) to admin site.  we need to follow below steps.
+Goto admin.py in you django project(empportal) app(emp) file. add the below lines
+from emp.models import Emp 
+admin.site.register(Emp)

@@ -11,5 +11,8 @@ class Emp(models.Model):
     email = models.EmailField(max_length=250, blank=True)
     phone = models.CharField(max_length=15, null=True)
 
+    def __str__(self):
+        return f"{self.name} - {self.salary_perday}"
+
 
 
