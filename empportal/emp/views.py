@@ -1,7 +1,10 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from emp.models import Emp
 #from django.http import HttpResponse
+
+def create_emp(request):
+    return HttpResponse("hello")
 def get_employees(request):
     emps = Emp.objects.all()
     #emps is the list of Emp class(django model) instances. 
@@ -9,9 +12,10 @@ def get_employees(request):
     # Above return statement will throw an error. Django server not able to understand the 
     # django model instances.
     #serialization. we need to convert list of django model instances to list of dictionaires.
-    data = [{"name":emp.name,"salary":emp.salary_perday} for emp in emps]
+    #data = [{"name":emp.name,"salary":emp.salary_perday} for emp in emps]
 
-    return HttpResponse(data)
+    #return HttpResponse(data)
+    return render(request, "emp/emps.html", {"emps": emps})
 
 # Create your views here.
 def home(request):
