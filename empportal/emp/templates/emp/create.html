@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <form method="POST">
+            {% csrf_token %}
+            name: <input type="text" name="name"><br>
+            empid: <input type="text" name="empid"><br>
+            address: <input type="text" name="address"><br>
+            salary_perday: <input type="text" name="salary_perday"><br>
+            emp_type: <select name="emp_type">
+                <option value="ADMIN">ADMIN</option>
+                <option value="HR">HR</option>
+                <option value="EMPLOYEE">EMPLOYEE</option>
+            </select><br>
+            email: <input type="text" name="email"><br>
+            phone: <input type="text" name="phone"><br>
+            <input type="submit" value="create">
+        </form>
+    </body>
+</html>

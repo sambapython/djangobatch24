@@ -4,7 +4,23 @@ from emp.models import Emp
 #from django.http import HttpResponse
 
 def create_emp(request):
-    return HttpResponse("hello")
+    #return HttpResponse("hello")
+    if request.method == "POST":
+        act_data = request.POST
+        data = {"name": act_data.get("name"),
+        "empid": act_data.get("empid"),
+        "salary_perday": act_data.get("salary_perday"),
+        "email": act_data.get("email"),
+        "phone": act_data.get("phone"),
+        "address": act_data.get("address"),
+        "emp_type": act_data.get("emp_type"),
+        }
+        emp_inst = Emp(**data)
+        emp_inst.save()
+
+    type_choices = Emp.emp_type_choices
+    return render(request, "emp/create.html", {"emp_types": type_choices})
+
 def get_employees(request):
     emps = Emp.objects.all()
     #emps is the list of Emp class(django model) instances. 

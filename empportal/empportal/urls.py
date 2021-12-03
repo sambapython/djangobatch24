@@ -24,4 +24,5 @@ urlpatterns = [
     path("numberOfCores/", get_cpu_cores),
     path('', home),
     path("emp/", include("emp.urls")),
+    path("attendance/", include('attendance.urls'))
 ]
