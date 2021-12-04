@@ -2,7 +2,7 @@
     <head></head>
     <body>
         <h1> EMPLOYEES </h1>
-        <a href="createEmp/">CREATE EMPLOYEE</a>
+        <a href="{% url 'emp:create_emp' %}">CREATE EMPLOYEE</a>
         <br>
         <h1></h1>
         <table border="2">
@@ -12,6 +12,7 @@
             {% for emp in emps%}
             <tr>
                 <td>{{ emp.name}}</td><td>{{ emp.salary_perday }}</td>
+                <td><a href="{% url 'emp:updateEmp' emp.id %}">UPDATE</a> -- <a>DELETE</a></td>
             </tr>
             {% endfor %}
 
