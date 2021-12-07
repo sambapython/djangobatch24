@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <h1>DELETE EMP</h1>
+        <ul>
+            <li>NAME: {{ emp.name}}</li>
+            <li>empid: {{ emp.id}}</li>
+        </ul>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="submit" name="submit">
+            <input type="submit" value="cancel" name="cancel">
+        </form>
+    </body>
+</html>

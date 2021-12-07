@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>SALES APPLICATION</title>
+    </head>
+    <body>
+        <h1>create Category</h1>
+        <form method="post">
+            {% csrf_token %}
+            name: <input type="text" name="name">
+            <input type="submit" value="create">
+        </form>
+        
+    </body>
+</html>

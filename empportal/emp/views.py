@@ -3,6 +3,14 @@ from django.shortcuts import redirect, render
 from emp.models import Emp
 #from django.http import HttpResponse
 
+def delete_emp(request, emp_id):
+    emp_ins = Emp.objects.get(id=emp_id)
+    if request.method == "POST":
+        if 'submit' in request.POST:
+            emp_ins.delete()
+        return redirect("/emp/")
+    return render(request, "emp/confirm.html", {"emp":emp_ins })
+
 def update_emp(request, emp_id):
     emp_ins = Emp.objects.get(id=emp_id)
     if request.method=="POST":

@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>SALES APPLICATION</title>
+    </head>
+    <body>
+        <h1>Categories</h1>
+        <a href="/category/create/">CREATE CATEGORY</a>
+        <ul>
+            {% for cat in cats %}
+                <li>{{ cat.name }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

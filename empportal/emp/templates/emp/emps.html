@@ -12,7 +12,8 @@
             {% for emp in emps%}
             <tr>
                 <td>{{ emp.name}}</td><td>{{ emp.salary_perday }}</td>
-                <td><a href="{% url 'emp:updateEmp' emp.id %}">UPDATE</a> -- <a>DELETE</a></td>
+                <td><a href="{% url 'emp:updateEmp' emp.id %}">UPDATE</a> -- 
+                    <a href="{% url 'emp:deleteEmp' emp.id %}">DELETE</a></td>
             </tr>
             {% endfor %}
 
