@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from product.views import view_categories, view_create_category
+from product.views import view_categories, view_create_category, view_update_category,\
+    view_delete_category, view_hide_category
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('categories/', view_categories),# view_categories(request_obj)
-    path('category/create/', view_create_category)
+    path('category/create/', view_create_category),
+    path('category/update/<int:cat_id>/', view_update_category),
+    #view_update_category(request_obj, cat_id=5)
+    path('category/delete/<int:cat_id>/', view_delete_category),
+    #view_delete_category(request_obj, cat_id=1)
+    path('category/hide/<int:cat_id>/', view_hide_category),
 ]

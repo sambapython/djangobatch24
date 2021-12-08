@@ -6,8 +6,8 @@
         <h1>create Category</h1>
         <form method="post">
             {% csrf_token %}
-            name: <input type="text" name="name">
-            <input type="submit" value="create">
+            name: <input type="text" name="name" value="{{ data.name }}">
+            <input type="submit" value="Submit">
         </form>
         
     </body>
