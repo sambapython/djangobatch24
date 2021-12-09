@@ -1,4 +1,22 @@
-<html>
+{% extends 'base.html'%}
+{% block content%}
+    <h1>Categories</h1>
+    <a href="/category/create/">CREATE CATEGORY</a>
+    <table border="2">
+        <tr><th>ID</th><th>NAME</th><th>OPERATIONS</th></tr>
+        {% for cat in cats %}
+            <tr>
+                <td>{{cat.id}}</td><td>{{ cat.name}}</td>
+                <td><a href="/category/update/{{ cat.id }}/">UPDATE</a>||
+                <a href="/category/delete/{{ cat.id }}/">DELETE</a>||
+                <a href="/category/hide/{{ cat.id }}/">HIDE</a>
+            </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+<!-- <html>
     <head>
         <title>SALES APPLICATION</title>
     </head>
@@ -18,4 +36,4 @@
             {% endfor %}
         </table>
     </body>
-</html>
+</html> -->

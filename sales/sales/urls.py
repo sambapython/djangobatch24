@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from product.views import view_categories, view_create_category, view_update_category,\
-    view_delete_category, view_hide_category
+    view_delete_category, view_hide_category, view_index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,5 @@ urlpatterns = [
     path('category/delete/<int:cat_id>/', view_delete_category),
     #view_delete_category(request_obj, cat_id=1)
     path('category/hide/<int:cat_id>/', view_hide_category),
+    path("", view_index),
 ]

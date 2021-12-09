@@ -2,6 +2,10 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from product.models import Category
+
+def view_index(request):
+    return render(request, "base.html")
+
 def view_hide_category(request, cat_id):
     cat_inst = Category.objects.get(id=cat_id)
     if request.method == "POST":

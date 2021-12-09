@@ -1,4 +1,17 @@
-<html>
+{% extends 'base.html' %}
+{% block content%}
+    <h1>create Category</h1>
+    <form method="post">
+        {% csrf_token %}
+        name: <input type="text" name="name" value="{{ data.name }}">
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
+
+
+
+
+<!-- <html>
     <head>
         <title>SALES APPLICATION</title>
     </head>
@@ -11,4 +24,4 @@
         </form>
         
     </body>
-</html>
+</html> -->
