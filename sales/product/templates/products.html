@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% block content%}
+    <h1>Products</h1>
+    <a href="/product/create/">CREATE PRODUCT</a>
+    <table border="2">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>COST</th>
+            <th>DELIVERY CHARGES</th>
+            <th>category</th>
+            <th>category discount</th>
+            <th>OPERATIONS</th>
+        </tr>
+        {% for product in data %}
+            <tr>
+                <td>{{product.id}}</td>
+                <td>{{ product.name}}</td>
+                <td>{{ product.cost}}</td>
+                <td>{{ product.deliver_charges}}</td>
+                <td>{{ product.category}}</td>
+                <td>{{ product.category.discount}}</td>
+                <td><a href="/product/update/{{ cat.id }}/">UPDATE</a>||
+                <a href="/product/delete/{{ cat.id }}/">DELETE</a>||
+                <a href="/product/hide/{{ cat.id }}/">HIDE</a>
+            </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

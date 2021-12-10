@@ -1,7 +1,11 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from product.models import Category
+from product.models import Category, Product
+
+def view_products(request):
+    context = {"data": Product.objects.all()}
+    return render(request, "products.html", context)
 
 def view_index(request):
     return render(request, "base.html")
