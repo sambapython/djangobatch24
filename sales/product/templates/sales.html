@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block content%}
+    <h1>Sales Orders</h1>
+    <a href="/sales/create/">CREATE Sales Order</a>
+    {% for sale_order in data %}
+        <ul>
+            <li>Customer: {{sale_order.customer }}</li>
+            <li>Description: {{sale_order.description }}</li>
+        </ul>
+        <p></p>
+        <table border="2">
+            <tr>
+                <th>Name</th>
+                <th>category</th>
+                <th>COST</th>
+                <th>Quantity</th>
+            </tr>
+                {% for sale_product  in sale_order.salesproducts_set.all %}
+                <tr>
+                    <td>{{sale_product.product}}</td>
+                    <td>{{sale_product.product.category}}</td>
+                    <td>{{ sale_product.cost }}</td>
+                    <td>{{ sale_product.quantity }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+    {% endfor %}
+    
+{% endblock %}

@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from product.views import view_categories, view_create_category, view_update_category,\
-    view_delete_category, view_hide_category, view_index, view_products
+    view_delete_category, view_hide_category, view_index, view_products, view_sales,\
+    view_sales_create, view_customers, view_create_customer, view_update_customer,\
+    view_delete_customer
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +29,15 @@ urlpatterns = [
     path('category/delete/<int:cat_id>/', view_delete_category),
     #view_delete_category(request_obj, cat_id=1)
     path('category/hide/<int:cat_id>/', view_hide_category),
+    path('customers/', view_customers),# view_categories(request_obj)
+    path('customer/create/', view_create_customer),
+    path('customer/update/<int:cust_id>/', view_update_customer),
+    #view_update_customer(request_obj, cat_id=5)
+    path('customer/delete/<int:cust_id>/', view_delete_customer),
+    #view_delete_customer(request_obj, cat_id=1)
+    # path('customer/hide/<int:cust_id>/', view_hide_customer),
     path("", view_index),
-    path("products/", view_products)
+    path("products/", view_products),
+    path("sales/", view_sales),
+    path("sales/create/", view_sales_create)
 ]

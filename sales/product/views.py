@@ -1,7 +1,19 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from product.models import Category, Product
+from product.models import Category, Product, Sales, Customer
+def view_sales_create(request):
+    context = {"customers": Customer.objects.all()}
+    if request.method == "POST":
+        print("*"*20)
+        print(request.POST)
+        context = {"products": Product.objects.all(),"sales_data":request.POST}
+        return render(request, "add_product.html", context)
+    return render(request, "create_sales.html", context)
+
+def view_sales(request):
+    contrext = {"data":Sales.objects.all()}
+    return render(request, 'sales.html', contrext)
 
 def view_products(request):
     context = {"data": Product.objects.all()}
@@ -9,6 +21,49 @@ def view_products(request):
 
 def view_index(request):
     return render(request, "base.html")
+
+# Create your views here.
+def view_delete_customer(request, cust_id):
+    cust_inst = Customer.objects.get(id=cust_id)
+    if request.method == "POST":
+        if "delete" in request.POST:
+            cust_inst.delete()
+        return redirect("/customers/")
+    context = {"data": cust_inst}
+    return render(request, "confirm_customer.html", context)
+    
+    
+
+def view_update_customer(request, cust_id):
+    cust_inst = Customer.objects.get(id=cust_id)
+    if request.method == "POST":
+        cust_inst.name=request.POST.get("name")
+        cust_inst.save()
+        return redirect("/customers/")
+        #return view_categories(request)
+
+    context = {"data": cust_inst}
+    return render(request, "create_customer.html", context)
+def view_create_customer(request):
+    if request.method == "POST":
+        data = request.POST
+        cust_inst = Customer(name=data.get("name"))
+        cust_inst.save()
+        # context = {"cats": Customer.objects.all()}
+        # return render(request, 'categories.html',context)
+        return redirect("/customers/")
+    return render(request, 'create_customer.html')
+
+def view_customers(request):
+    # need to get the the stored categories and send as a resposne.
+    #return HttpResponse("cats")
+    #return HttpResponse(data)
+    #context = {"cats": Customer.objects.all()}
+    context = {"cats": Customer.objects.all()}
+    return render(request, 'customers.html',context)
+
+
+
 
 def view_hide_category(request, cat_id):
     cat_inst = Category.objects.get(id=cat_id)

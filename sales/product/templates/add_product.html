@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content%}
+    <h1>Add  Product</h1>
+    Description: {{ sales_data.description}}
+    Customer: {{ sales_data.customer}}
+    <form method="post">
+        {% csrf_token %}
+        Products <select>
+            {% for product in products%}
+            <option value="{{ product.id }}">{{ product.name}}</option>
+            {% endfor %}
+        </select>
+        Quantity<input type="text" name="quantity">
+        cost <input type="text" name="cost">
+        <input type="submit" value="Add">
+    </form>
+{% endblock %}

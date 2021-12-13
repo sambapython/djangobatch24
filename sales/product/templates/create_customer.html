@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content%}
-    <h1>create Category</h1>
+    <h1>create Customer</h1>
     <form method="post">
         {% csrf_token %}
         name: <input type="text" name="name" value="{{ data.name }}">

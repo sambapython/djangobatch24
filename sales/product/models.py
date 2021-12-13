@@ -24,6 +24,9 @@ class Customer(models.Model):
     # phone = models.CharField(max_length=11)
     # email = models.CharField(max_length=250)
 
+    def __str__(self):
+        return self.name
+
 class Sales(models.Model):
     description = models.CharField(max_length=250)
     products = models.ManyToManyField(Product, through='SalesProducts')
