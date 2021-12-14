@@ -20,6 +20,8 @@ from product.views import view_categories, view_create_category, view_update_cat
     view_sales_create, view_customers, view_create_customer, view_update_customer,\
     view_delete_customer
 
+from product import user_auth
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('categories/', view_categories),# view_categories(request_obj)
@@ -39,5 +41,7 @@ urlpatterns = [
     path("", view_index),
     path("products/", view_products),
     path("sales/", view_sales),
-    path("sales/create/", view_sales_create)
+    path("sales/create/", view_sales_create),
+    path("signin/",user_auth.view_signin),
+    path("signup/",user_auth.view_signup),
 ]
