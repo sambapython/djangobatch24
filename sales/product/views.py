@@ -2,18 +2,19 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from product.models import Category, Product, Sales, Customer
+from django.contrib.auth.decorators import login_required
 def view_sales_create(request):
     context = {"customers": Customer.objects.all()}
     if request.method == "POST":
-        print("*"*20)
-        print(request.POST)
         context = {"products": Product.objects.all(),"sales_data":request.POST}
         return render(request, "add_product.html", context)
     return render(request, "create_sales.html", context)
 
+@login_required
 def view_sales(request):
     contrext = {"data":Sales.objects.all()}
     return render(request, 'sales.html', contrext)
+    
 
 def view_products(request):
     context = {"data": Product.objects.all()}

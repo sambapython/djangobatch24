@@ -1,13 +1,17 @@
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login, logout, logout
 from django.contrib.auth.models import User
 def view_signin(request):
 	message=""
 	if request.method == "POST":
 		username = request.POST.get("username")
 		password = request.POST.get("password")
-		if authenticate(username=username, password=password):
+		user = authenticate(username=username, password=password)
+		if user:
 			message = "User loged in successfully!!" 
+			login(request, user)
+			next_url = request.GET.get("next","/")
+			return redirect(next_url)
 		else:
 			message = "User not loged in, Wrong credentials!!"
 
@@ -27,3 +31,7 @@ def view_signup(request):
 			message = "Username already exist!! SignUp failed!!"
 	context = {"message":message}
 	return render(request, "signup.html", context)
+
+def view_signout(request):
+	logout(request)
+	return redirect("/")

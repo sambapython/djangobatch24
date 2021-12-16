@@ -44,4 +44,5 @@ urlpatterns = [
     path("sales/create/", view_sales_create),
     path("signin/",user_auth.view_signin),
     path("signup/",user_auth.view_signup),
+    path("signout/", user_auth.view_signout),
 ]
