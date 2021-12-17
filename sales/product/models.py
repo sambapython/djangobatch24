@@ -1,8 +1,9 @@
 from django.db import models
+from product.validations import validate_name
 
 # Create your models here.
 class Category(models.Model):
-    name=models.CharField(max_length=250)
+    name=models.CharField(max_length=250, validators=[validate_name])
     hide = models.BooleanField(default=False)
     discount = models.PositiveIntegerField(default=0)
 

@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from product.models import Category, Product, Sales, Customer
 from django.contrib.auth.decorators import login_required
+from product.forms import CategoryForm
+from django.contrib import messages
 def view_sales_create(request):
     context = {"customers": Customer.objects.all()}
     if request.method == "POST":
@@ -100,13 +102,18 @@ def view_update_category(request, cat_id):
     return render(request, "create_category.html", context)
 def view_create_category(request):
     if request.method == "POST":
-        data = request.POST
-        cat_inst = Category(name=data.get("name"))
-        cat_inst.save()
-        # context = {"cats": Category.objects.all()}
-        # return render(request, 'categories.html',context)
+        form =  CategoryForm(data=request.POST)
+        if form.is_valid():# validate_name('cat3')
+            form.instance.save()
+            messages.success(message="category %s created successfully!" % form.instance.name,
+                request=request)
+        else:
+            messages.error(message=form.errors.get("__all__"), request=request)
         return redirect("/categories/")
-    return render(request, 'create_category.html')
+    else:
+        form = CategoryForm()
+    context = {"form": form}
+    return render(request, 'create_category.html', context)
 
 def view_categories(request):
     # need to get the the stored categories and send as a resposne.

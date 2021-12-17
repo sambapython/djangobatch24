@@ -32,6 +32,11 @@
           </div>
         </nav>
         <div class="container" style="margin-top:50px">
+          <ul>
+            {% for message in messages %}
+              <li>{{message.level_tag }}::{{ message }}</li>
+            {% endfor %}
+          </ul>
             {% block content%}
                 <h1>This site is for sales operations.</h1>
             {% endblock %}   
