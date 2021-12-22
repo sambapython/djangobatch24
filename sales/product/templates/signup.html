@@ -4,8 +4,7 @@
     <p>{{ message }}</p>
     <form method="post">
         {% csrf_token %}
-        username: <input type="text" name="username">
-        password:<input type="password" name="password">
+        {{ form.as_p }}
         <input type="submit" name="" value="Signup">
         
     </form>

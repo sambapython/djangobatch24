@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout, logout
-from django.contrib.auth.models import User
+from product.forms import MyUserForm
+from django.contrib import messages
 def view_signin(request):
 	message=""
 	if request.method == "POST":
@@ -21,15 +22,19 @@ def view_signin(request):
 def view_signup(request):
 	message=""
 	if request.method == "POST":
-		username = request.POST.get("username")
-		password = request.POST.get("password")
-		try:
-			User.objects.create_user(username=username, password=password)
-			message="user created successfully"
-		except Exception as err:
-			#message=err
-			message = "Username already exist!! SignUp failed!!"
-	context = {"message":message}
+		form = MyUserForm(data=request.POST)
+		if form.is_valid():
+			form.instance.save()
+			myuser = form.instance
+			user = myuser.user_ptr
+			user.set_password(request.POST.get("password"))
+			user.save()
+			messages.success(request=request, message="User created successfully")
+		else:
+			messages.error(request=request, message=form._errors)
+	else:
+		form = MyUserForm()
+	context = {"message":message, "form": form}
 	return render(request, "signup.html", context)
 
 def view_signout(request):

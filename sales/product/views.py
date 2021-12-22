@@ -3,13 +3,17 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from product.models import Category, Product, Sales, Customer
 from django.contrib.auth.decorators import login_required
-from product.forms import CategoryForm
+from product.forms import CategoryForm, product_form_set, SalesForm
 from django.contrib import messages
 def view_sales_create(request):
     context = {"customers": Customer.objects.all()}
     if request.method == "POST":
-        context = {"products": Product.objects.all(),"sales_data":request.POST}
-        return render(request, "add_product.html", context)
+        sale_form = SalesForm(data=request.POST)
+        product_forms = product_form_set(initial=[request.POST])
+    else:
+        sale_form = SalesForm()
+        product_forms = product_form_set()
+    context = {"sale_form":sale_form, "product_forms": product_forms}
     return render(request, "create_sales.html", context)
 
 @login_required
