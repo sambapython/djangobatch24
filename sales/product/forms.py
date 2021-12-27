@@ -1,6 +1,7 @@
+from django.db import models
 from django.db.models import fields
 from django.forms import ModelForm, formset_factory
-from product.models import Category, Sales, SalesProducts
+from product.models import Category, Product, Sales, SalesProducts
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
@@ -16,6 +17,12 @@ class CategoryForm(ModelForm):
         model = Category
         fields = "__all__" #["name","discount"]
         exclude = ["hide", "created_at"]
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = "__all__"
+        exclude = ["hide","created_at"]
 
     # def clean(self):
     #     # this get called when you call form.is_valid method
@@ -36,5 +43,5 @@ class SalesProductsForm(ModelForm):
         model = SalesProducts
         fields = "__all__"
         exclude = ["sales"]
-product_form_set = formset_factory(SalesProductsForm)
+product_form_set = formset_factory(SalesProductsForm, extra=1)
 

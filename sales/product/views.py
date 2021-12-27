@@ -1,15 +1,56 @@
+from django.core.files.base import equals_lf
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from product.models import Category, Product, Sales, Customer
 from django.contrib.auth.decorators import login_required
-from product.forms import CategoryForm, product_form_set, SalesForm
+from product.forms import CategoryForm, product_form_set, SalesForm, ProductForm
 from django.contrib import messages
+def view_product_create(request):
+    if request.method=="POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.instance.save()
+            messages.success(message="Product created successfully", request=request)
+            return redirect("/products/")
+        else:
+            messages.error(message=form._errors, request=request)
+    else:
+        form = ProductForm()
+    context = {"form": form}
+    return render(request, "product_create.html", context)
+
 def view_sales_create(request):
     context = {"customers": Customer.objects.all()}
     if request.method == "POST":
         sale_form = SalesForm(data=request.POST)
-        product_forms = product_form_set(initial=[request.POST])
+        total_product_forms = int(request.POST.get("form-TOTAL_FORMS"))
+        initial_data = [{"cost":request.POST.get("form-%s-cost"%i),
+                        "product":request.POST.get("form-%s-product"%i),
+                        "quantity":request.POST.get("form-%s-quantity"%i),
+                        } for i  in  range(total_product_forms)]
+        product_forms = product_form_set(initial = initial_data)
+        if "submit" in request.POST:
+            if sale_form.is_valid():
+                sale_form.instance.save()
+                sale_id = sale_form.instance.id
+                product_forms = product_form_set(request.POST)
+                for product_form in  product_forms.forms:
+                    if product_form.is_valid():
+                        product_form.instance.sales_id=sale_id
+                        product_form.instance.save()
+                    else:
+                        messages.error(messages=product_form._errors, request=request)
+                messages.success(message="Sales Order submitted Successfully!",
+                                    request=request)
+                return redirect("/sales/")
+            else:
+                errors = []
+                if sale_form._errors:
+                    errors.append( sale_form._errors)
+                # if product_forms._errors:
+                #     errors.append(product_forms._errors)
+                messages.error(message=errors, request=request)    
     else:
         sale_form = SalesForm()
         product_forms = product_form_set()

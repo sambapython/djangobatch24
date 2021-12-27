@@ -3,10 +3,8 @@
     <h1>create Salesorder</h1>
     <form method="post">
         {% csrf_token %}
-        {{ sale_form }}
-        {% for product_form in product_forms%}
-            {{ product_form}}
-        {% endfor %}
+        {{ sale_form }}<br>
+        {{ product_forms }}
         <input type="submit" value="Add product" name="add">
         <input type="submit" value="Submit" name="submit">
     </form>

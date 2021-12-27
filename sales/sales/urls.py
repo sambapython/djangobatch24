@@ -18,7 +18,7 @@ from django.urls import path
 from product.views import view_categories, view_create_category, view_update_category,\
     view_delete_category, view_hide_category, view_index, view_products, view_sales,\
     view_sales_create, view_customers, view_create_customer, view_update_customer,\
-    view_delete_customer
+    view_delete_customer, view_product_create
 
 from product import user_auth
 
@@ -45,4 +45,5 @@ urlpatterns = [
     path("signin/",user_auth.view_signin),
     path("signup/",user_auth.view_signup),
     path("signout/", user_auth.view_signout),
+    path("product/create/", view_product_create)
 ]
