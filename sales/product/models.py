@@ -39,6 +39,7 @@ class Product(BaseAbstarctModel):
     cost = models.PositiveIntegerField(default=0)
     deliver_charges = models.PositiveIntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    #category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.FileField(default="")
     #many to one
     #category = models.CharField(max_length=250)
@@ -64,6 +65,7 @@ class Sales(models.Model):
 
 class SalesProducts(models.Model):
     sales = models.ForeignKey(Sales, on_delete=models.PROTECT)
+    #product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     cost = models.PositiveIntegerField(default=0)
     quantity = models.PositiveIntegerField(default=1)

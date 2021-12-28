@@ -120,7 +120,7 @@ def view_hide_category(request, cat_id):
             cat_inst.hide=True
             cat_inst.save()
         return redirect("/categories/")
-    context = {"data": cat_inst}
+    context = {"data": cat_inst}# {"object": cat_inst}
     return render(request, "confirm.html", context)
 
 # Create your views here.
