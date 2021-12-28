@@ -39,6 +39,7 @@ class Product(BaseAbstarctModel):
     cost = models.PositiveIntegerField(default=0)
     deliver_charges = models.PositiveIntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    image = models.FileField(default="")
     #many to one
     #category = models.CharField(max_length=250)
     # in this column we can add only category table id column values only

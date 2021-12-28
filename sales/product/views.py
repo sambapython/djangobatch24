@@ -8,9 +8,9 @@ from product.forms import CategoryForm, product_form_set, SalesForm, ProductForm
 from django.contrib import messages
 def view_product_create(request):
     if request.method=="POST":
-        form = ProductForm(request.POST)
+        form = ProductForm(data=request.POST, files=request.FILES)
         if form.is_valid():
-            form.instance.save()
+            form.save()
             messages.success(message="Product created successfully", request=request)
             return redirect("/products/")
         else:

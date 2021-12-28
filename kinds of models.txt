@@ -1,0 +1,22 @@
+1. abstract
+	class BaseAbstarctModel(models.Model):# Abstract model
+    		name=models.CharField(max_length=250, validators=[validate_name])
+	      	created_at = models.DateTimeField(default=datetime.now())
+    		class Meta:
+		        abstract=True
+	The abstract model will not create a table in datbase. If we inherit this model as parent class in any of our models. It will add the two extra columns(name,create_at)
+	in child model
+2. inherited models
+can create a child model.
+ 	class MyUser(User): # inherited model
+    		#it will create myuser table in db after migrate.
+	    # we have inherited this model from user, i.e it will create a one to one relationship
+	    # with User model
+	    phone = models.CharField(max_length=250, default="", null=True)
+	    adhar = models.CharField(max_length=250, default="", null=True)
+	    pan = models.CharField(max_length=250, default="", null=True)
+	    passport = models.CharField(max_length=250, default="", null=True)
+
+It will create a table(myuser) in database and also adds a poiter of the parent table in myuser table
+Note: the myuser table does not have id column as a primarykey. the pointer of User table act like a primarykey
+3. proxy models 

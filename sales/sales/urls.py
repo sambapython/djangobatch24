@@ -21,6 +21,8 @@ from product.views import view_categories, view_create_category, view_update_cat
     view_delete_customer, view_product_create
 
 from product import user_auth
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,4 +48,4 @@ urlpatterns = [
     path("signup/",user_auth.view_signup),
     path("signout/", user_auth.view_signout),
     path("product/create/", view_product_create)
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,6 +10,7 @@
             <th>DELIVERY CHARGES</th>
             <th>category</th>
             <th>category discount</th>
+            <th>IMAGE</th>
             <th>OPERATIONS</th>
         </tr>
         {% for product in data %}
@@ -20,6 +21,7 @@
                 <td>{{ product.deliver_charges}}</td>
                 <td>{{ product.category}}</td>
                 <td>{{ product.category.discount}}</td>
+                <td><img src="/media/{{product.image}}/" width=30 height=30></td>
                 <td><a href="/product/update/{{ cat.id }}/">UPDATE</a>||
                 <a href="/product/delete/{{ cat.id }}/">DELETE</a>||
                 <a href="/product/hide/{{ cat.id }}/">HIDE</a>
