@@ -25,12 +25,17 @@ from product import user_auth
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView, CreateView, UpdateView,\
-    DeleteView
+    DeleteView, ListView
 from product.forms import CategoryForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('categories/', view_categories),# view_categories(request_obj)
+    #path('categories/', view_categories),# view_categories(request_obj)
+    path('categories/', ListView.as_view(
+        model = Category,
+        template_name="categories.html",
+        paginate_by=10
+    )),# view_categories(request_obj)
     #path('category/create/', view_create_category),
     path('category/create/', CreateView.as_view(
         model = Category,

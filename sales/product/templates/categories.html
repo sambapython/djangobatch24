@@ -4,7 +4,7 @@
     <a href="/category/create/">CREATE CATEGORY</a>
     <table border="2">
         <tr><th>ID</th><th>NAME</th><th>OPERATIONS</th></tr>
-        {% for cat in cats %}
+        {% for cat in object_list %}
             <tr>
                 <td>{{cat.id}}</td><td>{{ cat.name}}</td>
                 <td><a href="/category/update/{{ cat.id }}/">UPDATE</a>||
@@ -14,26 +14,19 @@
             </tr>
         {% endfor %}
     </table>
+    <p>Total: {{paginator.count}}
+        showing:
+        {% if page_obj.object_list.exists %}
+             {{ page_obj.object_list.count}}</p>
+        {% else %}
+        0
+        {% endif %}
+    <p>{{ page_obj}}</p>
+    {% if page_obj.has_previous %}
+    <a href="/categories?page={{ page_obj.previous_page_number}}">PREVIOUS</a>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <a href="/categories?page={{ page_obj.next_page_number}}">NEXT</a>
+    {% endif %}
 
 {% endblock %}
-<!-- <html>
-    <head>
-        <title>SALES APPLICATION</title>
-    </head>
-    <body>
-        <h1>Categories</h1>
-        <a href="/category/create/">CREATE CATEGORY</a>
-        <table border="2">
-            <tr><th>ID</th><th>NAME</th><th>OPERATIONS</th></tr>
-            {% for cat in cats %}
-                <tr>
-                    <td>{{cat.id}}</td><td>{{ cat.name}}</td>
-                    <td><a href="/category/update/{{ cat.id }}/">UPDATE</a>||
-                    <a href="/category/delete/{{ cat.id }}/">DELETE</a>||
-                    <a href="/category/hide/{{ cat.id }}/">HIDE</a>
-                </td>
-                </tr>
-            {% endfor %}
-        </table>
-    </body>
-</html> -->
