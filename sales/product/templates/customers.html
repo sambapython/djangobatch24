@@ -7,9 +7,9 @@
         {% for cat in cats %}
             <tr>
                 <td>{{cat.id}}</td><td>{{ cat.name}}</td>
-                <td><a href="/category/update/{{ cat.id }}/">UPDATE</a>||
-                <a href="/category/delete/{{ cat.id }}/">DELETE</a>||
-                <a href="/category/hide/{{ cat.id }}/">HIDE</a>
+                <td><a href="/customer/update/{{ cat.id }}/">UPDATE</a>||
+                <a href="/customer/delete/{{ cat.id }}/">DELETE</a>||
+                <a href="/customer/hide/{{ cat.id }}/">HIDE</a>
             </td>
             </tr>
         {% endfor %}

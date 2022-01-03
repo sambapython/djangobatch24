@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.messages.api import success
-from django.urls import path
+from django.urls import path, include
 from product.models import Category
-from product.views import view_categories,view_hide_category, view_products, view_sales,\
+from product.views import view_hide_category, view_products, view_sales,\
     view_sales_create, view_customers, view_create_customer, view_update_customer,\
     view_delete_customer, view_product_create
 
@@ -29,6 +29,7 @@ from django.views.generic import TemplateView, CreateView, UpdateView,\
 from product.forms import CategoryForm
 
 urlpatterns = [
+    path("api/", include("api.urls")),
     path('admin/', admin.site.urls),
     #path('categories/', view_categories),# view_categories(request_obj)
     path('categories/', ListView.as_view(
@@ -66,7 +67,7 @@ urlpatterns = [
     #view_delete_category(request_obj, cat_id=1)
     path('category/hide/<int:cat_id>/', view_hide_category),
     path('customers/', view_customers),# view_categories(request_obj)
-    path('customer/create/', view_create_customer),
+    path('customer/create/', view_create_customer),# RequestCheck(view_create_customer).__call__(request)
     path('customer/update/<int:cust_id>/', view_update_customer),
     #view_update_customer(request_obj, cat_id=5)
     path('customer/delete/<int:cust_id>/', view_delete_customer),

@@ -6,6 +6,7 @@ from product.models import Category, Product, Sales, Customer
 from django.contrib.auth.decorators import login_required
 from product.forms import CategoryForm, product_form_set, SalesForm, ProductForm
 from django.contrib import messages
+from django.core.cache import cache
 def view_product_create(request):
     if request.method=="POST":
         form = ProductForm(data=request.POST, files=request.FILES)
@@ -76,6 +77,7 @@ def view_delete_customer(request, cust_id):
     if request.method == "POST":
         if "delete" in request.POST:
             cust_inst.delete()
+            cache.delete("customers")
         return redirect("/customers/")
     context = {"data": cust_inst}
     return render(request, "confirm_customer.html", context)
@@ -87,6 +89,7 @@ def view_update_customer(request, cust_id):
     if request.method == "POST":
         cust_inst.name=request.POST.get("name")
         cust_inst.save()
+        cache.delete("customers")
         return redirect("/customers/")
         #return view_categories(request)
 
@@ -96,18 +99,24 @@ def view_create_customer(request):
     if request.method == "POST":
         data = request.POST
         cust_inst = Customer(name=data.get("name"))
+        raise Exception("dsdfsdf")
         cust_inst.save()
+        cust_inst.save(using="backup")
+        cache.delete("customers")
         # context = {"cats": Customer.objects.all()}
         # return render(request, 'categories.html',context)
         return redirect("/customers/")
     return render(request, 'create_customer.html')
 
 def view_customers(request):
-    # need to get the the stored categories and send as a resposne.
-    #return HttpResponse("cats")
-    #return HttpResponse(data)
-    #context = {"cats": Customer.objects.all()}
-    context = {"cats": Customer.objects.all()}
+    cache_data = cache.get("customers")
+    if cache_data:
+        data = cache_data
+    else:
+        data = Customer.objects.all()
+        cache.set("customers",data)
+    context = {"cats": data}
+
     return render(request, 'customers.html',context)
 
 
@@ -122,50 +131,3 @@ def view_hide_category(request, cat_id):
         return redirect("/categories/")
     context = {"data": cat_inst}# {"object": cat_inst}
     return render(request, "confirm.html", context)
-
-# Create your views here.
-def view_delete_category(request, cat_id):
-    cat_inst = Category.objects.get(id=cat_id)
-    if request.method == "POST":
-        if "delete" in request.POST:
-            cat_inst.delete()
-        return redirect("/categories/")
-    context = {"data": cat_inst}
-    return render(request, "confirm.html", context)
-    
-    
-
-def view_update_category(request, cat_id):
-    cat_inst = Category.objects.get(id=cat_id)
-    if request.method == "POST":
-        cat_inst.name=request.POST.get("name")
-        cat_inst.save()
-        return redirect("/categories/")
-        #return view_categories(request)
-
-    context = {"data": cat_inst}
-    return render(request, "create_category.html", context)
-def view_create_category(request):
-    if request.method == "POST":
-        form =  CategoryForm(data=request.POST)
-        if form.is_valid():# validate_name('cat3')
-            form.instance.save()
-            messages.success(message="category %s created successfully!" % form.instance.name,
-                request=request)
-        else:
-            messages.error(message=form.errors.get("__all__"), request=request)
-        return redirect("/categories/")
-    else:
-        form = CategoryForm()
-    context = {"form": form}
-    return render(request, 'create_category.html', context)
-
-def view_categories(request):
-    # need to get the the stored categories and send as a resposne.
-    #return HttpResponse("cats")
-    #return HttpResponse(data)
-    #context = {"cats": Category.objects.all()}
-    context = {"cats": Category.objects.filter(hide=False)}
-    return render(request, 'categories.html',context)
-
-
