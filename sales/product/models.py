@@ -33,6 +33,9 @@ class Category(BaseAbstarctModel):
 
     def __str__(self):
         return  "%s-%s" %(self.name, self.discount)
+    
+    # def data(self):
+    #     return {"name":self.name,"discount":self.discount}
 
 class Product(BaseAbstarctModel):
     #name = models.CharField(max_length=250)
@@ -47,6 +50,7 @@ class Product(BaseAbstarctModel):
 
     def __str__(self):
         return self.name
+    
 
 class Customer(BaseAbstarctModel):
     pass
