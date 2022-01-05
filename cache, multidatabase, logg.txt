@@ -155,6 +155,42 @@ REST_FRAMEWORK = {
         )
 }
 
+Token based Authentication
+-------------------------
+Change the settings file like below
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        #'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    "DEFAULT_PERMISSION_CLASSES":(
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+        #"rest_framework.permissions.IsAuthenticated",
+        )
+}
+add "rest_framework.authtoken' in installedapp of settings
+python manage.py migrate
+Goto http://locahost:8000/admin.
+
+we can see Tokens link to add tokens
+
+To call an API,in postman-->AUtherization-->Tokens-> Add token
+If you want to create token from code follow the below code:
+In [2]: from rest_framework.authtoken.models import Token
+
+In [3]: from django.contrib.auth import get_user_model
+
+In [4]: user_model = get_user_model()
+
+In [5]: user = user_model.objects.first()
+In [11]: t=Token(user=user)
+
+In [12]: t.save()
+
+In [13]: print(t)
+a9f32e1a775820dcbab227f42f145e087825f258
+
+While calling an API from postman, mention token in Headers section: key: Authorization, value: Token <token>
 
 deployment with docker
 ----------------------------------

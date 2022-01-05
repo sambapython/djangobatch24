@@ -1,12 +1,37 @@
 from django.core.checks import messages
 from django.shortcuts import render
-from product.models import Category
+from product.models import Category, Product
 
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.serializers import CategorySerializer, CategoryGetSerializer
+from api.serializers import CategorySerializer, CategoryGetSerializer, ProductSerializer
 from rest_framework import status 
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
+from rest_framework import viewsets
+
+class ProductModelViewSet(viewsets.ModelViewSet):
+    model = Product
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+        
+
+class TokenView(APIView):
+    authentication_classes=[]
+    permission_classes=[]
+    def post(self, request):
+        user = authenticate(**request.data)
+        if user:
+            existed = Token.objects.filter(user=user).first()
+            if existed:
+                existed.delete()
+            t=Token(user=user)
+            t.save()
+            return Response(t.key)
+        else:
+            return Response("Invalid login",status=status.HTTP_401_UNAUTHORIZED)
+
 class CategoryAPIView(APIView):
     def post(self, request):
         # cat_inst = Category(**request.data)
